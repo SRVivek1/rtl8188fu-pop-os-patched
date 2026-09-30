@@ -4570,9 +4570,20 @@ struct sta_info *rtw_sta_info_get_by_idx(const int idx, struct sta_priv *pstapri
 	return psta;
 }
 
-static int	cfg80211_rtw_dump_station(struct wiphy *wiphy, struct net_device *ndev,
-			       int idx, u8 *mac, struct station_info *sinfo)
+//static int	cfg80211_rtw_dump_station(struct wiphy *wiphy, struct net_device *ndev,
+//			       int idx, u8 *mac, struct station_info *sinfo)
+
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
+static int cfg80211_rtw_dump_station(struct wiphy *wiphy, struct wireless_dev *wdev,
+                     int idx, u8 *mac, struct station_info *sinfo)
 {
+    struct net_device *ndev = wdev->netdev;
+#else
+static int cfg80211_rtw_dump_station(struct wiphy *wiphy, struct net_device *ndev,
+                     int idx, u8 *mac, struct station_info *sinfo)
+{
+#endif
+//{
 
 	int ret = 0;
 	_irqL irqL;

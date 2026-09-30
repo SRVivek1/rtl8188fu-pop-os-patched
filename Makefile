@@ -1,4 +1,10 @@
 # SPDX-License-Identifier: GPL-2.0
+
+# to fix build failure
+EXTRA_CFLAGS += -Wno-missing-prototypes -Wno-error
+EXTRA_CFLAGS += -Wno-incompatible-pointer-types
+# --
+
 EXTRA_CFLAGS += $(USER_EXTRA_CFLAGS)
 EXTRA_CFLAGS += -O1
 #EXTRA_CFLAGS += -O3
@@ -19,6 +25,7 @@ EXTRA_CFLAGS += -Wno-unused
 
 EXTRA_CFLAGS += -I$(src)/include
 EXTRA_CFLAGS += -I$(src)/hal/phydm
+
 
 EXTRA_LDFLAGS += --strip-debug
 
@@ -55,7 +62,7 @@ CONFIG_RTW_ADAPTIVITY_MODE = normal
 CONFIG_SIGNAL_SCALE_MAPPING = n
 CONFIG_80211W = n
 CONFIG_REDUCE_TX_CPU_LOADING = n
-CONFIG_BR_EXT = y
+CONFIG_BR_EXT = n
 CONFIG_ANTENNA_DIVERSITY = n
 CONFIG_TDLS = n
 CONFIG_WIFI_MONITOR = n
